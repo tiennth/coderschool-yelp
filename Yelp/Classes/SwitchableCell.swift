@@ -8,10 +8,16 @@
 
 import UIKit
 
+protocol SwitchableCellDelegate {
+    func switchableCell(cell:SwitchableCell, valueDidChanged newValue:Bool)
+}
+
 class SwitchableCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var stateSwitch: UISwitch!
+    
+    var delegate: SwitchableCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,4 +30,7 @@ class SwitchableCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func switchValueChanged(sender: UISwitch) {
+        self.delegate?.switchableCell(self, valueDidChanged: sender.on)
+    }
 }

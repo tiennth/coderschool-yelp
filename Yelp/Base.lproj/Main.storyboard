@@ -22,7 +22,11 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="NF7-Fs-JJ2">
-                                        <barButtonItem key="leftBarButtonItem" title="Filter" id="nGv-ay-Mwq"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Filter" id="nGv-ay-Mwq">
+                                            <connections>
+                                                <segue destination="aj1-Vh-cJw" kind="presentation" id="Nza-UG-Fxq"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -56,8 +60,8 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Md-ap-dpC" userLabel="ReviewCount">
-                                                    <rect key="frame" x="223" y="36" width="35.5" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Md-ap-dpC" userLabel="ReviewCount">
+                                                    <rect key="frame" x="223" y="35" width="35.5" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -174,6 +178,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hl1-uc-1eG">
                                                     <rect key="frame" x="306" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="switchValueChanged:" destination="vW2-AN-Rji" eventType="valueChanged" id="Iat-u6-SbS"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -196,8 +203,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VzW-Y0-3O5">
-                                                    <rect key="frame" x="8" y="11" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VzW-Y0-3O5">
+                                                    <rect key="frame" x="8" y="11.5" width="295" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -211,7 +218,10 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="VzW-Y0-3O5" firstAttribute="leading" secondItem="LzC-Cw-PJl" secondAttribute="leading" constant="8" id="24e-Rg-2gB"/>
+                                                <constraint firstItem="VzW-Y0-3O5" firstAttribute="centerY" secondItem="LzC-Cw-PJl" secondAttribute="centerY" id="HLA-Ri-lwy"/>
                                                 <constraint firstAttribute="trailing" secondItem="Wby-07-Dzf" secondAttribute="trailing" constant="20" id="JV6-Mx-7rF"/>
+                                                <constraint firstItem="Wby-07-Dzf" firstAttribute="leading" secondItem="VzW-Y0-3O5" secondAttribute="trailing" constant="20" id="hd0-HI-XSh"/>
                                                 <constraint firstItem="Wby-07-Dzf" firstAttribute="centerY" secondItem="LzC-Cw-PJl" secondAttribute="centerY" id="nQU-AY-HDe"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -244,11 +254,17 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="aj1-Vh-cJw" id="0C4-dh-vyX"/>
+                                    <outlet property="delegate" destination="aj1-Vh-cJw" id="ds5-i2-kLA"/>
+                                </connections>
                             </tableView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2zh-6f-GJM">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="5gK-AJ-ntc"/>
+                                    <navigationItem title="Title" id="5gK-AJ-ntc">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="fZA-Lp-1wd"/>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                         </subviews>
@@ -264,6 +280,9 @@
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="filterTableView" destination="aYf-uE-qJI" id="f2b-aZ-sww"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ja7-UA-bqb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
