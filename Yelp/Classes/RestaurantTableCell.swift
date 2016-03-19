@@ -16,6 +16,7 @@ class RestaurantTableCell: UITableViewCell {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var reviewCountLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var ratingImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,9 +34,9 @@ extension RestaurantTableCell {
     func bindViewWithBussiness(business:Business) {
         // Setting image
         if let _ = business.imageURL {
-            self.overviewImageView.setImageWithURL(business.imageURL!)
+            self.overviewImageView.setImageWithURL(business.imageURL!, placeholderImage: UIImage(named: "placeholder"))
         }
-        
+        self.ratingImageView.setImageWithURL(business.ratingImageURL!)
         self.nameLabel.text = business.name
         self.addressLabel.text = business.address
         if let _ = business.reviewCount {

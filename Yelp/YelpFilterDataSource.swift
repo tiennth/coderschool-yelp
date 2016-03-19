@@ -10,11 +10,11 @@ import UIKit
 
 class YelpFilterDataSource : NSObject {
     
-    let distanceValues = [0, 0.3, 1, 5, 20]
+    static let distanceValues:[Float] = [0, 0.3, 1, 5, 20]
     
-    let sortOptionValues = ["Best Match", "Distance", "Highest Rated"]
+    static let sortOptionValues = ["Best Match", "Distance", "Highest Rated"]
     
-    let categories:[[String:String]] = [["name" : "Afghan", "code": "afghani"],
+    static let categories:[[String:String]] = [["name" : "Afghan", "code": "afghani"],
         ["name" : "African", "code": "african"],
         ["name" : "American, New", "code": "newamerican"],
         ["name" : "American, Traditional", "code": "tradamerican"],

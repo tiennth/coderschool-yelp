@@ -8,36 +8,21 @@
 
 import UIKit
 
-enum SectionId {
-    case Deal
-    case Distance
-    case Sort
-    case Category
-}
-
 class SettingViewController: UIViewController {
     @IBOutlet weak var filterTableView: UITableView!
-    
-    let yelpFilterDataSource = YelpFilterDataSource()
     
     let sectionTitles = ["", "Distance", "Sort By", "Category"]
     var distanceExpanded = false
     var sortExpanded = false
     var categoryExpanded = false
     
-    let currentPref = FiltersPreferences()
+    var currentPref:FiltersPreferences!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 }
 
 extension SettingViewController:UITableViewDataSource {
@@ -56,19 +41,19 @@ extension SettingViewController:UITableViewDataSource {
             numberOfRow = 1
         case 1:
             if distanceExpanded {
-                numberOfRow = self.yelpFilterDataSource.distanceValues.count
+                numberOfRow = YelpFilterDataSource.distanceValues.count
             } else {
                 numberOfRow = 1
             }
         case 2:
             if sortExpanded {
-                numberOfRow = self.yelpFilterDataSource.sortOptionValues.count
+                numberOfRow = YelpFilterDataSource.sortOptionValues.count
             } else {
                 numberOfRow = 1
             }
         case 3:
             if categoryExpanded {
-                numberOfRow = self.yelpFilterDataSource.categories.count + 1 // Plus 1 for "collapse" row
+                numberOfRow = YelpFilterDataSource.categories.count + 1 // Plus 1 for "collapse" row
             } else {
                 numberOfRow = 5 // Just show 4 categories, 1 left for "Show All" row
             }
@@ -132,7 +117,7 @@ extension SettingViewController:UITableViewDataSource {
     }
     
     private func distanceTitleFromIndex(index:Int) -> String {
-        let mile = self.yelpFilterDataSource.distanceValues[index]
+        let mile = YelpFilterDataSource.distanceValues[index]
         
         if mile == 0 {
             return "Auto"
@@ -141,11 +126,11 @@ extension SettingViewController:UITableViewDataSource {
     }
     
     private func sortOptionTitleFromIndex(index:Int) -> String {
-        return self.yelpFilterDataSource.sortOptionValues[index]
+        return YelpFilterDataSource.sortOptionValues[index]
     }
     
     private func categoryTitleFromIndex(index:Int) -> String {
-        return self.yelpFilterDataSource.categories[index]["name"]!; // Fail will crash to notice
+        return YelpFilterDataSource.categories[index]["name"]!; // Fail will crash to notice
     }
 }
 
@@ -193,12 +178,16 @@ extension SettingViewController: SwitchableCellDelegate {
         let section = indexPath!.section
         
         if section == 3 {
-            
+            print("Before \(self.currentPref.categoryIndexes)")
             if newValue {
                 self.currentPref.categoryIndexes.append(row)
             } else {
-                self.currentPref.categoryIndexes.removeAtIndex(self.currentPref.categoryIndexes.indexOf(row)!)
+                let indexOfRow = self.currentPref.categoryIndexes.indexOf(row)
+                if indexOfRow != nil {
+                    self.currentPref.categoryIndexes.removeAtIndex(indexOfRow!)
+                }
             }
+            print("End \(self.currentPref.categoryIndexes)")
         } else if section == 0 {
             self.currentPref.deals = newValue
         }
