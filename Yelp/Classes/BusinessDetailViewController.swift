@@ -42,9 +42,9 @@ class BusinessDetailViewController: UIViewController {
         
         if (self.business.lat != nil && self.business.lon != nil) {
             let location = CLLocationCoordinate2D(latitude: self.business.lat!, longitude: self.business.lon!)
-            self.centerMapOnLocation(location)
+            self.mapView.centerMapOnLocation(location)
             
-            let artwork = MKBusiness(title: business.name!, coordinate: location)
+            let artwork = MKBusiness(title: business.name!, coordinate: location, subtitle: business.address!)
             self.mapView.addAnnotation(artwork)
         }
         
@@ -65,7 +65,7 @@ class BusinessDetailViewController: UIViewController {
     @IBAction func buttonAddressDidClicked(sender: AnyObject) {
         if (self.business.lat != nil && self.business.lon != nil) {
             let location = CLLocationCoordinate2D(latitude: self.business.lat!, longitude: self.business.lon!)
-            self.centerMapOnLocation(location)
+            self.mapView.centerMapOnLocation(location)
         }
     }
 
@@ -79,10 +79,4 @@ class BusinessDetailViewController: UIViewController {
     }
     */
 
-    let regionRadius: CLLocationDistance = 1000
-    func centerMapOnLocation(location: CLLocationCoordinate2D) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location,
-            regionRadius * 2.0, regionRadius * 2.0)
-        mapView.setRegion(coordinateRegion, animated: true)
-    }
 }

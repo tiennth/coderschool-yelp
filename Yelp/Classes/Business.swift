@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class Business: NSObject {
     let businessId: String?
@@ -96,6 +97,23 @@ class Business: NSObject {
         businessId = dictionary["id"] as? String
         
         
+    }
+    
+    /*
+    if (self.business.lat != nil && self.business.lon != nil) {
+    let location = CLLocationCoordinate2D(latitude: self.business.lat!, longitude: self.business.lon!)
+    self.centerMapOnLocation(location)
+    
+    let artwork = MKBusiness(title: business.name!, coordinate: location)
+    self.mapView.addAnnotation(artwork)
+    }
+    */
+    
+    func locationPoint() -> CLLocationCoordinate2D? {
+        if (self.lat != nil && self.lon != nil) {
+            return CLLocationCoordinate2D(latitude: self.lat!, longitude: self.lon!)
+        }
+        return nil
     }
     
     class func businesses(array array: [NSDictionary]) -> [Business] {

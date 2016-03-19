@@ -16,6 +16,9 @@ class SettingViewController: UIViewController {
     var sortExpanded = false
     var categoryExpanded = false
     
+    let checkedImage = UIImage(named: "checked")?.imageWithRenderingMode(.AlwaysTemplate)
+    let uncheckedImage = UIImage(named: "unchecked")?.imageWithRenderingMode(.AlwaysTemplate)
+    let dropdownImage = UIImage(named: "dropdown")?.imageWithRenderingMode(.AlwaysTemplate)
     var currentPref:FiltersPreferences!
     
     override func viewDidLoad() {
@@ -79,8 +82,14 @@ extension SettingViewController:UITableViewDataSource {
             let imageCell = tableView.dequeueReusableCellWithIdentifier("ImageCell") as! ImageCell
             if distanceExpanded {
                 imageCell.titleLabel.text = self.distanceTitleFromIndex(row)
+                if row == self.currentPref.distanceIndex {
+                    imageCell.iconImageView.image = checkedImage
+                } else {
+                    imageCell.iconImageView.image = uncheckedImage
+                }
             } else {
                 imageCell.titleLabel.text = self.distanceTitleFromIndex(self.currentPref.distanceIndex)
+                imageCell.iconImageView.image = dropdownImage
             }
             
             cell = imageCell
@@ -88,8 +97,14 @@ extension SettingViewController:UITableViewDataSource {
             let imageCell = tableView.dequeueReusableCellWithIdentifier("ImageCell") as! ImageCell
             if sortExpanded {
                 imageCell.titleLabel.text = self.sortOptionTitleFromIndex(row)
+                if row == self.currentPref.sortOptionIndex {
+                    imageCell.iconImageView.image = checkedImage
+                } else {
+                    imageCell.iconImageView.image = uncheckedImage
+                }
             } else {
                 imageCell.titleLabel.text = self.sortOptionTitleFromIndex(self.currentPref.sortOptionIndex)
+                imageCell.iconImageView.image = dropdownImage
             }
             
             cell = imageCell

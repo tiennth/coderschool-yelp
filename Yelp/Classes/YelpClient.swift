@@ -59,7 +59,7 @@ class YelpClient: BDBOAuth1RequestOperationManager {
         // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
 
         // Default the location to San Francisco
-        var parameters: [String : AnyObject] = ["ll": "37.785771,-122.406165"]
+        var parameters: [String : AnyObject] = ["ll": "\(AppConfig.latitude),\(AppConfig.longitude)"]
 
         if term != nil {
             parameters["term"] = term!
