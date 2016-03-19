@@ -20,7 +20,6 @@ class BusinessesViewController: UIViewController {
     
     // Businesses
     var businesses: [Business]!
-    var filteredBusinesses: [Business]!
     var currentPref = FiltersPreferences()
     var searchTerm:String? = nil
     var isSearchBarVisible = false
@@ -47,13 +46,9 @@ class BusinessesViewController: UIViewController {
         self.searchBar.resignFirstResponder()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        
-    }
-    
     private func createSearchBarNavigationItem() {
         self.searchBar = UISearchBar()
-        self.searchBar.tintColor = UIColor.redColor()
+//        self.searchBar.tintColor = UIColor.redColor()
 //        self.searchBar.showsCancelButton = true
         self.searchBar.delegate = self
         searchBar.sizeToFit()
@@ -76,7 +71,6 @@ class BusinessesViewController: UIViewController {
     
     private func createRightBarButton() {
         self.rightBarButton = UIBarButtonItem(title: "Map", style: .Plain, target: self, action: "rightBarButtonClicked:")
-        self.rightBarButton.tintColor = UIColor.redColor()
     }
     
     private func showLeftBarButton(show:Bool) {
@@ -108,6 +102,15 @@ class BusinessesViewController: UIViewController {
     }
     
     // MARK: - Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let cell = sender as! UITableViewCell
+        let indexPath = self.restaurantTableView.indexPathForCell(cell)
+        print(indexPath)
+        let detailVc = segue.destinationViewController as! BusinessDetailViewController
+        if indexPath != nil {
+            detailVc.business = self.businesses[indexPath!.row]
+        }
+    }
     
     @IBAction func cancelSettingViewController(segue:UIStoryboardSegue) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -133,7 +136,6 @@ class BusinessesViewController: UIViewController {
             MBProgressHUD.hideHUDForView(self.view, animated: true)
             
             self.businesses = businesses
-            self.filteredBusinesses = businesses
             self.restaurantTableView.reloadData()
         }
     }
@@ -148,7 +150,6 @@ class BusinessesViewController: UIViewController {
             
             self.isMoreDataLoading = false
             self.businesses.appendContentsOf(businesses)
-            self.filteredBusinesses = self.businesses
             self.restaurantTableView.reloadData()
         }
     }
@@ -156,12 +157,12 @@ class BusinessesViewController: UIViewController {
 
 extension BusinessesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.filteredBusinesses?.count ?? 0
+        return self.businesses?.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RestaurentCell") as! RestaurantTableCell
-        cell.bindViewWithBussiness(self.filteredBusinesses![indexPath.row])
+        cell.bindViewWithBussiness(self.businesses![indexPath.row])
         return cell
     }
     

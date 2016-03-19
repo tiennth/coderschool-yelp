@@ -9,6 +9,7 @@
 import UIKit
 
 class Business: NSObject {
+    let businessId: String?
     let name: String?
     let address: String?
     let imageURL: NSURL?
@@ -16,6 +17,8 @@ class Business: NSObject {
     let distance: String?
     let ratingImageURL: NSURL?
     let reviewCount: NSNumber?
+    let lat:Double?
+    let lon:Double?
     
     init(dictionary: NSDictionary) {
         name = dictionary["name"] as? String
@@ -29,6 +32,8 @@ class Business: NSObject {
         
         let location = dictionary["location"] as? NSDictionary
         var address = ""
+        var lat:Double? = nil
+        var lon:Double? = nil
         if location != nil {
             let addressArray = location!["address"] as? NSArray
             if addressArray != nil && addressArray!.count > 0 {
@@ -42,8 +47,22 @@ class Business: NSObject {
                 }
                 address += neighborhoods![0] as! String
             }
+            
+            /*
+            "coordinate": {
+            "latitude": 37.7848643788333,
+            "longitude": -122.402581932663
+            }
+*/
+            let coordinate = location!["coordinate"] as? NSDictionary
+            if coordinate != nil {
+                lat = coordinate!["latitude"] as? Double
+                lon = coordinate!["longitude"] as? Double
+            }
         }
         self.address = address
+        self.lat = lat
+        self.lon = lon
         
         let categoriesArray = dictionary["categories"] as? [[String]]
         if categoriesArray != nil {
@@ -73,6 +92,10 @@ class Business: NSObject {
         }
         
         reviewCount = dictionary["review_count"] as? NSNumber
+        
+        businessId = dictionary["id"] as? String
+        
+        
     }
     
     class func businesses(array array: [NSDictionary]) -> [Business] {

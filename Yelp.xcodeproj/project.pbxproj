@@ -12,6 +12,8 @@
 		222D8A6219CCF9F900D2DB53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 222D8A6119CCF9F900D2DB53 /* Images.xcassets */; };
 		222D8A6519CCF9F900D2DB53 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 222D8A6319CCF9F900D2DB53 /* LaunchScreen.xib */; };
 		222D8A7119CCF9F900D2DB53 /* YelpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222D8A7019CCF9F900D2DB53 /* YelpTests.swift */; };
+		7218BF4E1C9D508C00B5361E /* BusinessDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7218BF4D1C9D508C00B5361E /* BusinessDetailViewController.swift */; };
+		7218BF501C9D655400B5361E /* MKBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7218BF4F1C9D655400B5361E /* MKBusiness.swift */; };
 		722B3AC41C987067002DD227 /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722B3AC11C987067002DD227 /* Business.swift */; };
 		722B3AC51C987067002DD227 /* BusinessesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722B3AC21C987067002DD227 /* BusinessesViewController.swift */; };
 		722B3AC61C987067002DD227 /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722B3AC31C987067002DD227 /* YelpClient.swift */; };
@@ -47,6 +49,8 @@
 		222D8A6A19CCF9F900D2DB53 /* YelpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YelpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		222D8A6F19CCF9F900D2DB53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		222D8A7019CCF9F900D2DB53 /* YelpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpTests.swift; sourceTree = "<group>"; };
+		7218BF4D1C9D508C00B5361E /* BusinessDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BusinessDetailViewController.swift; path = Classes/BusinessDetailViewController.swift; sourceTree = "<group>"; };
+		7218BF4F1C9D655400B5361E /* MKBusiness.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKBusiness.swift; sourceTree = "<group>"; };
 		722B3AC11C987067002DD227 /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Business.swift; path = Classes/Business.swift; sourceTree = "<group>"; };
 		722B3AC21C987067002DD227 /* BusinessesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BusinessesViewController.swift; path = Classes/BusinessesViewController.swift; sourceTree = "<group>"; };
 		722B3AC31C987067002DD227 /* YelpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YelpClient.swift; path = Classes/YelpClient.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 				722B3AC11C987067002DD227 /* Business.swift */,
 				729536E41C9B766B00F89DEA /* FiltersPreferences.swift */,
 				729536E61C9C66CA00F89DEA /* YelpFilterDataSource.swift */,
+				7218BF4F1C9D655400B5361E /* MKBusiness.swift */,
 			);
 			name = Models;
 			path = ..;
@@ -167,6 +172,7 @@
 			children = (
 				722B3AC21C987067002DD227 /* BusinessesViewController.swift */,
 				729536DC1C9AFA3000F89DEA /* SettingViewController.swift */,
+				7218BF4D1C9D508C00B5361E /* BusinessDetailViewController.swift */,
 			);
 			name = "View Controllers";
 			path = ..;
@@ -375,6 +381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				722B3AC51C987067002DD227 /* BusinessesViewController.swift in Sources */,
+				7218BF4E1C9D508C00B5361E /* BusinessDetailViewController.swift in Sources */,
 				722B3AC91C9870BD002DD227 /* RestaurantTableCell.swift in Sources */,
 				722B3AC41C987067002DD227 /* Business.swift in Sources */,
 				222D8A5B19CCF9F900D2DB53 /* AppDelegate.swift in Sources */,
@@ -386,6 +393,7 @@
 				729536DF1C9B69BA00F89DEA /* SwitchableCell.swift in Sources */,
 				729536E71C9C66CA00F89DEA /* YelpFilterDataSource.swift in Sources */,
 				729536DD1C9AFA3000F89DEA /* SettingViewController.swift in Sources */,
+				7218BF501C9D655400B5361E /* MKBusiness.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
