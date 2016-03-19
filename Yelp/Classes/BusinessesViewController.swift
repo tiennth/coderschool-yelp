@@ -20,8 +20,11 @@ class BusinessesViewController: UIViewController {
     
     // Businesses
     var businesses: [Business]!
+    var filteredBusinesses: [Business]!
     var currentPref = FiltersPreferences()
-    var isSearchBarVisible:Bool = false
+    var searchTerm:String? = nil
+    var isSearchBarVisible = false
+    var isMoreDataLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,13 +127,28 @@ class BusinessesViewController: UIViewController {
     func loadRestaurantsData() {
         let mbLoadingView = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         mbLoadingView.mode = MBProgressHUDMode.Indeterminate;
-//        mbLoadingView.labelText = "Loading movies...";
         
         let prefValue = self.currentPref.filterValues()
-        Business.searchWithTerm(nil, sort: prefValue.sortMode, categories: prefValue.category, deals: prefValue.deals, distance: prefValue.distanceInMile) { (businesses, error) -> Void in
+        Business.searchWithTerm(self.searchTerm, sort: prefValue.sortMode, categories: prefValue.category, deals: prefValue.deals, distance: prefValue.distanceInMile) { (businesses, error) -> Void in
             MBProgressHUD.hideHUDForView(self.view, animated: true)
             
             self.businesses = businesses
+            self.filteredBusinesses = businesses
+            self.restaurantTableView.reloadData()
+        }
+    }
+    
+    func loadMoreRestaurantsData() {
+        let mbLoadingView = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        mbLoadingView.mode = MBProgressHUDMode.Indeterminate;
+        
+        let prefValue = self.currentPref.filterValues()
+        Business.searchWithTerm(self.searchTerm, sort: prefValue.sortMode, categories: prefValue.category, deals: prefValue.deals, distance: prefValue.distanceInMile, offset: self.businesses.count) { (businesses, error) -> Void in
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            
+            self.isMoreDataLoading = false
+            self.businesses.appendContentsOf(businesses)
+            self.filteredBusinesses = self.businesses
             self.restaurantTableView.reloadData()
         }
     }
@@ -138,12 +156,12 @@ class BusinessesViewController: UIViewController {
 
 extension BusinessesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.businesses?.count ?? 0
+        return self.filteredBusinesses?.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RestaurentCell") as! RestaurantTableCell
-        cell.bindViewWithBussiness(self.businesses![indexPath.row])
+        cell.bindViewWithBussiness(self.filteredBusinesses![indexPath.row])
         return cell
     }
     
@@ -161,20 +179,31 @@ extension BusinessesViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension BusinessesViewController: UISearchBarDelegate {
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        // Show all movie
-        searchBar.text = ""
-        // Don't focus on searchbar any more
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        self.searchTerm = searchBar.text
+        
+        self.loadRestaurantsData()
+        
         searchBar.resignFirstResponder()
-//        searchBar.setShowsCancelButton(false, animated: true)
     }
-    
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-//        searchBar.setShowsCancelButton(true, animated: true)
-        return true
+}
+
+extension BusinessesViewController : UIScrollViewDelegate {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        self.searchBar.resignFirstResponder()
+        
+        if self.isMoreDataLoading {
+            return
+        }
+        
+        let scrollViewContentHeight = self.restaurantTableView.contentSize.height
+        let scrollOffsetThreshold = scrollViewContentHeight - self.restaurantTableView.bounds.size.height
+        
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.restaurantTableView.dragging) {
+            isMoreDataLoading = true
+            
+            self.loadMoreRestaurantsData()
+        }
+        
     }
 }
