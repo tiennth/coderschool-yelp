@@ -16,6 +16,7 @@ class BusinessesViewController: UIViewController {
     var rightBarButton: UIBarButtonItem!
     
     // UIs
+    @IBOutlet weak var emptyTableLabel: UILabel!
     @IBOutlet weak var restaurantMapView: MKMapView!
     @IBOutlet weak var restaurantTableView: UITableView!
     @IBOutlet weak var overlayView: UIView!
@@ -113,12 +114,12 @@ class BusinessesViewController: UIViewController {
         self.leftBarButton = UIBarButtonItem(customView: button)
         */
 
-        self.leftBarButton = UIBarButtonItem(title: "Filter", style: .Plain, target: self, action: "leftBarButtonClicked:")
+        self.leftBarButton = UIBarButtonItem(title: "", style: .Plain, target: self, action: "leftBarButtonClicked:")
         self.leftBarButton.image = UIImage(named: "filter")
     }
     
     private func createRightBarButton() {
-        self.rightBarButton = UIBarButtonItem(title: "Map", style: .Plain, target: self, action: "rightBarButtonClicked:")
+        self.rightBarButton = UIBarButtonItem(title: "", style: .Plain, target: self, action: "rightBarButtonClicked:")
         self.rightBarButton.image = UIImage(named: "map")
     }
     
@@ -128,6 +129,17 @@ class BusinessesViewController: UIViewController {
         } else {
             self.navigationItem.leftBarButtonItem = nil
         }
+    }
+    
+    private func switchBarButtonImage() {
+        // Dont no why i can't set bar button image easy way.
+        var icon = UIImage(named: "map")?.imageWithRenderingMode(.AlwaysTemplate)
+        if self.restaurantMapView.hidden {
+            icon = UIImage(named: "list")?.imageWithRenderingMode(.AlwaysTemplate)
+        }
+        self.rightBarButton = UIBarButtonItem(title: "", style: .Plain, target: self, action: "rightBarButtonClicked:")
+        self.rightBarButton.image = icon
+        self.navigationItem.rightBarButtonItem = self.rightBarButton
     }
     
     private func showRightBarButton(show:Bool) {
@@ -150,6 +162,7 @@ class BusinessesViewController: UIViewController {
         if self.isAnimatingSwitchMode {
             return
         }
+        self.switchBarButtonImage()
         
         let mapViewHidden = self.restaurantMapView.hidden
         // from will invisible, to will be visible
@@ -160,6 +173,7 @@ class BusinessesViewController: UIViewController {
             to = self.restaurantMapView
             from = self.restaurantTableView
         }
+
         
         to.alpha = 0
         from.hidden = false
@@ -255,6 +269,12 @@ class BusinessesViewController: UIViewController {
     }
     
     func onLoadDataSuccess() {
+        if self.businesses.count == 0 {
+            self.emptyTableLabel.hidden = self.restaurantTableView.hidden
+        } else {
+            self.emptyTableLabel.hidden = true
+        }
+        
         self.restaurantTableView.reloadData()
         if  self.businessPins.count > 0 {
             self.restaurantMapView.addAnnotations(self.businessPins)

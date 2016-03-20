@@ -132,6 +132,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No data" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CVt-DP-w26">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.86274509799999999" green="0.054901960780000002" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -139,10 +146,14 @@
                             <constraint firstAttribute="trailing" secondItem="JTH-Wt-UGF" secondAttribute="trailing" id="8tJ-Xq-yn5"/>
                             <constraint firstItem="JTH-Wt-UGF" firstAttribute="top" secondItem="hR0-74-jRp" secondAttribute="bottom" id="AJ9-Rd-32c"/>
                             <constraint firstAttribute="trailing" secondItem="rn1-qG-CE9" secondAttribute="trailing" id="Bow-hY-iCV"/>
+                            <constraint firstItem="VBY-gq-v8E" firstAttribute="top" secondItem="CVt-DP-w26" secondAttribute="bottom" id="C0T-qw-Usj"/>
                             <constraint firstItem="VBY-gq-v8E" firstAttribute="top" secondItem="rn1-qG-CE9" secondAttribute="bottom" id="UEB-ut-Wrz"/>
                             <constraint firstItem="JTH-Wt-UGF" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="WbZ-lO-50f"/>
+                            <constraint firstAttribute="trailing" secondItem="CVt-DP-w26" secondAttribute="trailing" id="awl-ps-u3s"/>
+                            <constraint firstItem="CVt-DP-w26" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="b8y-gL-h4Q"/>
                             <constraint firstItem="VBY-gq-v8E" firstAttribute="top" secondItem="JTH-Wt-UGF" secondAttribute="bottom" id="bSg-j1-Sdp"/>
                             <constraint firstItem="rn1-qG-CE9" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="esw-Nr-Whf"/>
+                            <constraint firstItem="CVt-DP-w26" firstAttribute="top" secondItem="hR0-74-jRp" secondAttribute="bottom" id="gql-DF-gzU"/>
                             <constraint firstItem="l96-7x-j06" firstAttribute="top" secondItem="hR0-74-jRp" secondAttribute="bottom" id="kmI-ar-zy1"/>
                             <constraint firstItem="l96-7x-j06" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="nFV-lP-N9d"/>
                             <constraint firstItem="rn1-qG-CE9" firstAttribute="top" secondItem="hR0-74-jRp" secondAttribute="bottom" id="ueO-qh-t67"/>
@@ -153,6 +164,7 @@
                     <navigationItem key="navigationItem" id="gzI-sR-H1v"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="emptyTableLabel" destination="CVt-DP-w26" id="wOC-Vg-3dp"/>
                         <outlet property="overlayView" destination="l96-7x-j06" id="qvc-Q6-7uz"/>
                         <outlet property="restaurantMapView" destination="rn1-qG-CE9" id="oq4-Aj-GPJ"/>
                         <outlet property="restaurantTableView" destination="JTH-Wt-UGF" id="yW7-oK-GAN"/>
