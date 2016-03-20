@@ -2,13 +2,13 @@
 
 **Yelp** is a Yelp search app using the [Yelp API](http://www.yelp.com/developers/documentation/v2/search_api).
 
-Time spent: **X** hours spent in total
+Time spent: About **20** hours spent in total 
 
 ## User Stories
 
 The following **required** functionality is completed:
 
-- [ ] Search results page
+- [x] Search results page
    - [x] Table rows should be dynamic height according to the content height.
    - [x] Custom cells should have the proper Auto Layout constraints.
    - [x] Search bar should be in the navigation bar (doesn't have to expand to show location like the real Yelp app does).
@@ -24,31 +24,29 @@ The following **optional** features are implemented:
 - [x] Search results page
    - [x] Infinite scroll for restaurant results.
    - [x] Implement map view of restaurant results.
-- [o] Filter page
+- [ ] Filter page
    - [ ] Implement a custom switch instead of the default UISwitch.
    - [x] Distance filter should expand as in the real Yelp app
    - [x] Categories should show a subset of the full list with a "See All" row to expand. Category list is [here](http://www.yelp.com/developers/documentation/category_list).
 - [x] Implement the restaurant detail page.
 
-The following **additional** features are implemented:
-
-- [ ] List anything else that you can get done to improve the app functionality!
-
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. Provide more detail in Detail screen. Currently I dont provide much detail in this screen.
+2. Save the filter across app uses. Currently filter will be reset if the app is killed.
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='Yelp.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
-
+- I spent much time in the setting view controller, to think about the best way to orgarnize data for this kind of tableview, but still feel not satisfied.
+- I know e=mc^2 means error = (more code)^2, but don't have enough time to check and fix all. The  UISearchBar flashed when you come back from detail view controller. 
+- Texts in UISearchBar is not synchronized with data in tableview if you type in search bar but dont click "Search", I dont have any solution to improve this UX.
 
 
 ## License
